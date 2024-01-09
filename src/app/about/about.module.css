@@ -29,6 +29,7 @@
   align-items: center;
 }
 .num {
+  text-align: center;
   font-size: x-large;
   font-weight: bold;
   color: var(--btn);
@@ -37,4 +38,16 @@
   color: white;
   font-size: small;
   font-weight: normal;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .numbers {
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 50px;
+  }
 }

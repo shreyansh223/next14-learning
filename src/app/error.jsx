@@ -1,6 +1,6 @@
 'use client';
 const error = () => {
-  return <div>error</div>;
+  return <div>unavailable</div>;
 };
 
 export default error;

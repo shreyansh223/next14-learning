@@ -72,3 +72,10 @@ a {
     padding-right: 20px;
   }
 }
+@media (max-width: 475px) {
+  .container {
+    width: 380px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

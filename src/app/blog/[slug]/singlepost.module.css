@@ -11,6 +11,7 @@
   object-fit: cover;
 }
 .textContainer {
+  display: flex;
   flex: 2;
   flex-direction: column;
   gap: 50px;
@@ -20,10 +21,31 @@
 }
 .detail {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 .avatar {
   object-fit: cover;
   border-radius: 50px;
+}
+.detailText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.detailTitle {
+  color: grey;
+  font-weight: bold;
+}
+.detailValue {
+  font-weight: 500;
+}
+
+.content {
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  .imgContainer {
+    display: none;
+  }
 }
