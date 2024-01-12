@@ -12,11 +12,19 @@ import { getPost } from '@/components/lib/data';
 //   }
 //   return res.json();
 // };
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params;
+  const post = await getPost(slug);
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
 
 const SinglePostpage = async ({ params }) => {
   const { slug } = params;
   // console.log(slug);
-  const post = await getPost({ slug });
+  const post = await getPost(slug);
   console.log(post);
 
   return (
