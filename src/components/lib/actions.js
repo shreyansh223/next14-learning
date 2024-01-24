@@ -1,6 +1,7 @@
-import revalidatePath from 'next/dist/server/web/spec-extension/revalidate-path';
+'use server';
 import { Post } from './models';
 import connectToDb from './utils';
+import { signIn, signOut } from './auth';
 
 export const addPost = async (formData) => {
   'use server';
@@ -26,3 +27,12 @@ export const addPost = async (formData) => {
   }
 };
 //3:13:11
+
+export const handleGithubLogin = async () => {
+  'use server';
+  await signIn('github');
+};
+export const handleLogout = async () => {
+  'use server';
+  await signOut();
+};
