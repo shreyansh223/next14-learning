@@ -1,7 +1,9 @@
 'use server';
-import { Post } from './models';
+import { Post, User } from './models';
 import connectToDb from './utils';
 import { signIn, signOut } from './auth';
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
 
 export const addPost = async (formData) => {
   'use server';
@@ -35,4 +37,39 @@ export const handleGithubLogin = async () => {
 export const handleLogout = async () => {
   'use server';
   await signOut();
+};
+export const register = async (formData) => {
+  const { username, email, password, passwordRepeat } =
+    Object.fromEntries(formData);
+  if (password != passwordRepeat) return 'Passwords do not match';
+  try {
+    connectToDb();
+    const user = await User.findOne({ username });
+    if (user) return 'user already exists';
+    bcrypt.hash(password, saltRounds, async function (err, hash) {
+      const newUser = new User({
+        username,
+        email,
+        password: hash,
+      });
+      await newUser.save();
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const handleUsernamePasswordLogin = async (formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn('credentials', { username, password });
+  } catch (err) {
+    console.log(err);
+
+    if (err.message.includes('CredentialsSignin')) {
+      return { error: 'Invalid username or password' };
+    }
+    throw err;
+  }
 };
